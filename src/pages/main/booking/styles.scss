@@ -2,23 +2,89 @@
     width: 100%;
     height: calc(100vh - 72px);
     position: relative;
+    .booking__back {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--text-color-level3, rgba(77, 80, 85, 0.1));
+        border-radius: 50%;
+        position: absolute;
+        top: 2%;
+        left: 1%;
+        opacity: 0.2;
+        transition: all 0.5s;
+        img {
+            width: 20px;
+            height: 20px;
+            margin: 9px;
+        }
+        &:hover {
+            opacity: 1;
+        }
+    }
     .booking__container {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 1060px;
-        height: 500px;
+        height: 650px;
         display: flex;
         border: 1px solid rgba(77, 80, 85, 0.1);
         border-radius: 8px;
         box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.08);
-
+        padding: 20px 20px 20px 0;
         .booking__content {
             width: 35%;
             border-top-left-radius: 8px;
             border-bottom-left-radius: 8px;
-            border-right: 1px solid rgba(77, 80, 85, 0.1);
+            border-right: 1px solid #0707071a;
+            .booking__img {
+                width: 125px;
+                height: 125px;
+                margin: auto;
+                img {
+                    width: 100%;
+                }
+            }
+            .booking__avata {
+                position: relative;
+                .booking__hr {
+                    margin: 60px 0 30px 0;
+                    color: #0707078c;
+                }
+                img {
+                    box-shadow: 0px 0px 15px 1px rgba(150, 146, 146, 0.75);
+                    width: 75px;
+                    height: 75px;
+                    position: absolute;
+                    top: -50px;
+                    left: -25px;
+                    transform: translate(50px, 10px);
+                    border: 1px solid #8080808c;
+                    border-radius: 50%;
+                }
+            }
+            .booking__text {
+                margin: 30px;
+                .booking__name {
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin-top: 50px;
+                }
+                .booking__result {
+                    margin-bottom: 20px;
+                }
+                .booking__clock {
+                    display: flex;
+                    font-weight: 500;
+                    img {
+                        margin-right: 10px;
+                        width: 20px;
+                        height: 20px;
+                        opacity: 0.8;
+                    }
+                }
+            }
         }
         .booking__dateTime {
             width: 65%;
@@ -30,10 +96,11 @@
                 text-align: left;
                 margin-bottom: 20px;
                 font-size: 20px;
-                font-weight: 500;
+                font-weight: 700;
             }
             .booking__item {
                 display: flex;
+                height: 90%;
                 .booking__date {
                     width: 60%;
                     margin-left: 19px;
@@ -41,10 +108,46 @@
                     .react-calendar {
                         width: 100%;
                         border: none;
+                        .react-calendar__navigation {
+                            margin-bottom: 0;
+                        }
                     }
                 }
                 .booking__time {
                     width: 40%;
+                    .booking__datePicker {
+                        height: 38px;
+                        margin-bottom: 10px;
+                        font-family: 16px;
+                        line-height: 42px;
+                    }
+                    .booking__showList {
+                        padding-right: 10px;
+                        height: 85%;
+                        overflow: auto;
+                        .booking__button {
+                            display: block;
+                            width: 100%;
+                            height: 52px;
+                            padding: 13px 10px;
+                            .booking__span {
+                                font-weight: 600;
+                                font-size: 18px;
+                                line-height: 1.5;
+                            }
+                            &:nth-child(even) {
+                                margin: 10px 0;
+                            }
+                        }
+                        &::-webkit-scrollbar {
+                            width: 6px;
+                            background-color: #f5f5f5;
+                        }
+                        &::-webkit-scrollbar-thumb {
+                            border-radius: 10px;
+                            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                        }
+                    }
                 }
             }
         }
