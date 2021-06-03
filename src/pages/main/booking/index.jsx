@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./styles.scss";
 import { NavLink } from "react-router-dom";
-import { TextField } from "@material-ui/core";
+import moment from "moment";
 function Booking() {
   const listTime = [
     "09:00",
@@ -24,6 +24,8 @@ function Booking() {
     "16:00",
     "16:30",
   ];
+  const today = new Date();
+  console.log(today);
   const [value, onChange] = useState("");
   const [time, setTime] = useState(null);
   const [click, setClick] = useState(null);
@@ -74,6 +76,7 @@ function Booking() {
     });
   };
   const tileDisabled = ({ date }) => {
+    console.log(date);
     if (date.getDay() === 0 || date.getDay() === 6) return date;
   };
   return (
@@ -190,6 +193,7 @@ function Booking() {
                   onChange={onChange}
                   value={value}
                   tileDisabled={tileDisabled}
+                  minDate={today}
                 />
               </div>
               {value !== "" ? (
