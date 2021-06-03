@@ -23,26 +23,58 @@ function Booking() {
     "16:00",
     "16:30",
   ];
+  const [value, onChange] = useState("");
+  const [time, setTime] = useState("");
+  const [click, setClick] = useState(null);
+  const [confirm, setConfirm] = useState(false);
+  const handleOnclick = (index) => {
+    setClick(index);
+    setConfirm(false);
+  };
+  const handleOnConfirm = () => {
+    setConfirm(true);
+  };
+  console.log(confirm);
   const showList = () => {
     return listTime.map((time, index) => {
       return (
-        <Button className="booking__button" variant="outlined" color="primary">
-          <span className="booking__span">{time}</span>
-        </Button>
+        <>
+          <Button
+            className={
+              click === index ? "booking__buttonClick" : "booking__button"
+            }
+            variant="outlined"
+            color="primary"
+            key={index}
+            onClick={() => handleOnclick(index)}
+          >
+            <span className="booking__span">{time}</span>
+          </Button>
+          {click === index ? (
+            <Button
+              className="booking__confirm"
+              variant="outlined"
+              onClick={handleOnConfirm}
+            >
+              <span className="booking__confirmBtn">Confirm</span>
+            </Button>
+          ) : (
+            ""
+          )}
+        </>
       );
     });
   };
-
-  console.log(listTime);
-  const [value, onChange] = useState(new Date());
-  console.log(value.getDay());
-
   const tileDisabled = ({ date }) => {
     if (date.getDay() === 0 || date.getDay() === 6) return date;
   };
   return (
     <div className="booking__wrapper">
-      <div className="booking__container">
+      <div
+        className={
+          value === "" ? "booking__containerDefault" : "booking__container"
+        }
+      >
         <NavLink to="/">
           <div className="booking__back">
             <img
@@ -51,7 +83,11 @@ function Booking() {
             />
           </div>
         </NavLink>
-        <div className="booking__content">
+        <div
+          className={
+            value === "" ? "booking__contentDefault" : "booking__content"
+          }
+        >
           <div className="booking__img">
             <img
               src="https://chiase24.com/wp-content/uploads/2020/01/Tong-hop-nhung-hinh-anh-Icon-dang-yeu-cute-nhat-30.gif"
@@ -80,28 +116,49 @@ function Booking() {
             </p>
           </div>
         </div>
-        <div className="booking__dateTime">
-          <h2 className="booking__title">Select a Date & Time</h2>
-          <div className="booking__item">
-            <div className="booking__date">
-              <Calendar
-                onChange={onChange}
-                value={value}
-                tileDisabled={tileDisabled}
-              />
-            </div>
-            <div className="booking__time">
-              <div className="booking__datePicker">
-                {value.toLocaleString("en-US", {
-                  weekday: "long",
-                  day: "numeric",
-                  month: "long",
-                })}
+
+        {confirm === false ? (
+          <div
+            className={
+              value === "" ? "booking__dateTimeDefault" : "booking__dateTime"
+            }
+          >
+            <h2 className="booking__title">Select a Date & Time</h2>
+            <div
+              className={
+                value === "" ? "booking__itemDefault" : "booking__item"
+              }
+            >
+              <div
+                className={
+                  value === "" ? "booking__dateDefault" : "booking__date"
+                }
+              >
+                <Calendar
+                  onChange={onChange}
+                  value={value}
+                  tileDisabled={tileDisabled}
+                />
               </div>
-              <div className="booking__showList">{showList()}</div>
+              {value !== "" ? (
+                <div className="booking__time">
+                  <div className="booking__datePicker">
+                    {value.toLocaleString("en-US", {
+                      weekday: "long",
+                      day: "numeric",
+                      month: "long",
+                    })}
+                  </div>
+                  <div className="booking__showList">{showList()}</div>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="booking__form">form</div>
+        )}
       </div>
     </div>
   );
