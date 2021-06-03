@@ -4,6 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./styles.scss";
 import { NavLink } from "react-router-dom";
+import { TextField } from "@material-ui/core";
 function Booking() {
   const listTime = [
     "09:00",
@@ -24,16 +25,23 @@ function Booking() {
     "16:30",
   ];
   const [value, onChange] = useState("");
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState(null);
   const [click, setClick] = useState(null);
   const [confirm, setConfirm] = useState(false);
-  const handleOnclick = (index) => {
+  const handleOnclick = (index, value) => {
     setClick(index);
+    setTime(value);
     setConfirm(false);
   };
   const handleOnConfirm = () => {
     setConfirm(true);
   };
+  const handleResetState = () => {
+    onChange("");
+    setConfirm(false);
+    setClick(null);
+  };
+  console.log(value);
   console.log(confirm);
   const showList = () => {
     return listTime.map((time, index) => {
@@ -46,7 +54,7 @@ function Booking() {
             variant="outlined"
             color="primary"
             key={index}
-            onClick={() => handleOnclick(index)}
+            onClick={() => handleOnclick(index, time)}
           >
             <span className="booking__span">{time}</span>
           </Button>
@@ -72,20 +80,38 @@ function Booking() {
     <div className="booking__wrapper">
       <div
         className={
-          value === "" ? "booking__containerDefault" : "booking__container"
+          value === "" || confirm === true
+            ? "booking__containerDefault"
+            : "booking__container"
         }
       >
-        <NavLink to="/">
-          <div className="booking__back">
+        {value !== "" && confirm === true ? (
+          <div
+            className="booking__back"
+            onClick={handleResetState}
+            style={{ cursor: "pointer" }}
+          >
             <img
               src="https://image.flaticon.com/icons/png/512/271/271218.png"
               alt=""
             />
           </div>
-        </NavLink>
+        ) : (
+          <NavLink to="/">
+            <div className="booking__back">
+              <img
+                src="https://image.flaticon.com/icons/png/512/271/271218.png"
+                alt=""
+              />
+            </div>
+          </NavLink>
+        )}
+
         <div
           className={
-            value === "" ? "booking__contentDefault" : "booking__content"
+            value === "" || confirm === true
+              ? "booking__contentDefault"
+              : "booking__content"
           }
         >
           <div className="booking__img">
@@ -106,14 +132,40 @@ function Booking() {
             <h4 className="booking__result">Meeting with the Admin</h4>
             <p className="booking__clock">
               <img
-                src="https://image.flaticon.com/icons/png/512/1827/1827379.png"
+                src="https://image.flaticon.com/icons/png/512/66/66163.png"
                 alt=""
               />{" "}
               30 min
             </p>
             <p className="booking__end">
-              Thanks for booking a call. We are very pleased to welcome you
+              Thanks for booking a call. Meeting Details will follow
             </p>
+            {confirm === true ? (
+              <>
+                {" "}
+                <div className="booking__resultTime">
+                  <img
+                    src="https://image.flaticon.com/icons/png/512/1827/1827379.png"
+                    alt=""
+                  />
+                  {time}
+                </div>
+                <div className="booking__resultDate">
+                  <img
+                    src="https://image.flaticon.com/icons/png/512/2838/2838764.png"
+                    alt=""
+                  />
+                  {value.toLocaleString("en-US", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </div>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         </div>
 
@@ -157,7 +209,58 @@ function Booking() {
             </div>
           </div>
         ) : (
-          <div className="booking__form">form</div>
+          <div className="booking__form">
+            <h2>Enter Details</h2>
+            <form>
+              <div className="booking__formContainer">
+                <fieldset className="booking__formWrapper">
+                  <div className="booking__formName">
+                    <label className="booking__label">
+                      <span className="booking__spanName">Name *</span>
+                      <div className="booking__div">
+                        <input type="text" className="booking__input" />
+                      </div>
+                    </label>
+                  </div>
+                  <div className="booking__formEmail">
+                    <label className="booking__label">
+                      <span className="booking__spanName">Email *</span>
+                      <div className="booking__div">
+                        <input type="text" className="booking__input" />
+                      </div>
+                    </label>
+                  </div>
+                  <div className="booking__formPhone">
+                    <label className="booking__label">
+                      <span className="booking__spanName">Phone Number *</span>
+                      <div className="booking__div">
+                        <input type="text" className="booking__input" />
+                      </div>
+                    </label>
+                  </div>
+                  <div className="booking__formMore">
+                    <label className="booking__label">
+                      <span className="booking__spanName">
+                        Please share anything that will help prepare for our
+                        meeting.
+                      </span>
+                      <div className="booking__div">
+                        <textarea
+                          type="textarea"
+                          className="booking__textarea"
+                        />
+                      </div>
+                    </label>
+                  </div>
+                </fieldset>
+                <div className="booking__formBtn">
+                  <Button variant="outlined" color="primary">
+                    Submit
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </div>
         )}
       </div>
     </div>

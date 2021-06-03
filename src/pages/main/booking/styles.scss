@@ -86,6 +86,78 @@
                         opacity: 0.8;
                     }
                 }
+                .booking__resultTime,
+                .booking__resultDate {
+                    display: flex;
+                    font-weight: 500;
+                    line-height: 1.2;
+                    img {
+                        margin-right: 10px;
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                .booking__resultTime {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+        .booking__form {
+            width: 65%;
+            padding-left: 30px;
+            h2 {
+                margin-top: 0;
+                margin-bottom: 20px;
+                font-size: 24px;
+                line-height: 1.2;
+            }
+            form {
+                max-width: 400px;
+                .booking__formName,
+                .booking__formEmail,
+                .booking__formPhone,
+                .booking__formMore {
+                    .booking__label {
+                        width: 100%;
+                        .booking__spanName {
+                            display: inline-block;
+                            margin-bottom: 8px;
+                            font-weight: bold;
+                            font-size: 14px;
+                        }
+                        .booking__div {
+                            .booking__input,
+                            .booking__textarea {
+                                display: block;
+                                box-sizing: border-box;
+                                width: 100%;
+                                min-height: 46px;
+                                padding: 10px 14px;
+                                color: rgb(77, 80, 85);
+                                font-size: 16px;
+                                line-height: 1.5;
+                                word-wrap: normal;
+                                background: #ffffff;
+                                border: 1px solid #d0d0d0;
+                                border-radius: 8px;
+                                -webkit-appearance: none;
+                                appearance: none;
+                            }
+                            .booking__textarea {
+                                resize: none;
+                            }
+                        }
+                    }
+                }
+                .booking__formName,
+                .booking__formEmail,
+                .booking__formPhone {
+                    margin-bottom: 20px;
+                }
+                .booking__formBtn {
+                    margin-top: 20px;
+                    text-align: center;
+                }
             }
         }
         .booking__dateTimeDefault {
@@ -112,6 +184,22 @@
                         border: none;
                         .react-calendar__navigation {
                             margin-bottom: 0;
+                        }
+                        .react-calendar__tile:disabled {
+                            background-color: unset;
+                            color: gray;
+                        }
+                        .react-calendar__tile--now {
+                            background: none;
+                            abbr {
+                                border-bottom: 2px solid;
+                            }
+                        }
+                        .react-calendar__tile--active {
+                            color: black;
+                        }
+                        .react-calendar__month-view__days__day--neighboringMonth {
+                            visibility: hidden;
                         }
                     }
                 }
@@ -211,8 +299,8 @@
             border-bottom-left-radius: 8px;
             border-right: 1px solid #0707071a;
             .booking__img {
-                width: 125px;
-                height: 125px;
+                width: 100px;
+                height: 100px;
                 margin: auto;
                 img {
                     width: 100%;
@@ -283,6 +371,22 @@
                         border: none;
                         .react-calendar__navigation {
                             margin-bottom: 0;
+                        }
+                        .react-calendar__tile:disabled {
+                            background-color: unset;
+                            color: gray;
+                        }
+                        .react-calendar__tile--now {
+                            background: none;
+                            abbr {
+                                border-bottom: 2px solid;
+                            }
+                        }
+                        .react-calendar__tile--active {
+                            color: black;
+                        }
+                        .react-calendar__month-view__days__day--neighboringMonth {
+                            visibility: hidden;
                         }
                     }
                 }
