@@ -1,4 +1,7 @@
 import Booking from "../pages/main/booking";
+import Demoooo from "../pages/main/demo";
+import index2 from "../pages/main/demo/index2";
+import Demo2 from "../pages/main/demo2";
 import DemoLoginGoogle from "../pages/main/demoLogin";
 import DemoStoreImageFirebase from "../pages/main/demoStoreImage";
 import Home from "../pages/main/home";
@@ -34,6 +37,6 @@ export const mainRouter = [
   {
     path: "/booking",
     exact: false,
-    Component: Booking,
+    Component: Demo2,
   },
 ];

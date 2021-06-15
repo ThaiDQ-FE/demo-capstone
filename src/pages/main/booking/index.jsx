@@ -5,6 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import "./styles.scss";
 import { NavLink } from "react-router-dom";
 import moment from "moment";
+import Demoooo from "../demo";
 function Booking() {
   const listTime = [
     "09:00",
@@ -25,16 +26,29 @@ function Booking() {
     "16:30",
   ];
   const today = new Date();
-  console.log(today);
   const [value, onChange] = useState("");
   const [time, setTime] = useState(null);
   const [click, setClick] = useState(null);
+  const [onClick, setonClick] = useState(null);
   const [confirm, setConfirm] = useState(false);
-  const handleOnclick = (index, value) => {
+  const [arrray, setarrray] = useState([]);
+  const [dates, setDates] = useState([]);
+  let a = [];
+  const handleOnclick = (index, value, time) => {
     setClick(index);
     setTime(value);
     setConfirm(false);
+    a.push(
+      time.toLocaleString("en-US", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+      }) +
+        " " +
+        value
+    );
   };
+  console.log(a);
   const handleOnConfirm = () => {
     setConfirm(true);
   };
@@ -43,16 +57,27 @@ function Booking() {
     setConfirm(false);
     setClick(null);
   };
-  console.log(value);
-  console.log(confirm);
+  const handleChangeDate = () => {
+    onChange(value);
+  };
+  console.log(
+    value.toLocaleString("en-US", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+    }) +
+      " " +
+      time
+  );
+  const onClicked = () => {
+    setDates(value);
+  };
   const showList = () => {
     return listTime.map((time, index) => {
       return (
         <>
           <Button
-            className={
-              click === index ? "booking__buttonClick" : "booking__button"
-            }
+            className="booking__button"
             variant="outlined"
             color="primary"
             key={index}
@@ -60,23 +85,11 @@ function Booking() {
           >
             <span className="booking__span">{time}</span>
           </Button>
-          {click === index ? (
-            <Button
-              className="booking__confirm"
-              variant="outlined"
-              onClick={handleOnConfirm}
-            >
-              <span className="booking__confirmBtn">Confirm</span>
-            </Button>
-          ) : (
-            ""
-          )}
         </>
       );
     });
   };
   const tileDisabled = ({ date }) => {
-    console.log(date);
     if (date.getDay() === 0 || date.getDay() === 6) return date;
   };
   return (
@@ -116,61 +129,7 @@ function Booking() {
               ? "booking__contentDefault"
               : "booking__content"
           }
-        >
-          <div className="booking__img">
-            <img
-              src="https://chiase24.com/wp-content/uploads/2020/01/Tong-hop-nhung-hinh-anh-Icon-dang-yeu-cute-nhat-30.gif"
-              alt=""
-            />
-          </div>
-          <div className="booking__avata">
-            <hr className="booking__hr" />
-            <img
-              src="https://i.pinimg.com/474x/b3/64/20/b36420d81bbbd18b8e6cd37a79c90905.jpg"
-              alt=""
-            />
-          </div>
-          <div className="booking__text">
-            <p className="booking__name">Đặng Quốc Thái</p>
-            <h4 className="booking__result">Meeting with the Admin</h4>
-            <p className="booking__clock">
-              <img
-                src="https://image.flaticon.com/icons/png/512/66/66163.png"
-                alt=""
-              />{" "}
-              30 min
-            </p>
-            <p className="booking__end">
-              Thanks for booking a call. Meeting Details will follow
-            </p>
-            {confirm === true ? (
-              <>
-                {" "}
-                <div className="booking__resultTime">
-                  <img
-                    src="https://image.flaticon.com/icons/png/512/1827/1827379.png"
-                    alt=""
-                  />
-                  {time}
-                </div>
-                <div className="booking__resultDate">
-                  <img
-                    src="https://image.flaticon.com/icons/png/512/2838/2838764.png"
-                    alt=""
-                  />
-                  {value.toLocaleString("en-US", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </div>
-              </>
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
+        ></div>
 
         {confirm === false ? (
           <div
@@ -194,6 +153,7 @@ function Booking() {
                   value={value}
                   tileDisabled={tileDisabled}
                   minDate={today}
+                  onClick={onClicked}
                 />
               </div>
               {value !== "" ? (
