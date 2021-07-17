@@ -12,7 +12,7 @@ export const mainRouter = [
   {
     path: "/",
     exact: true,
-    Component: DemoLoadDB,
+    Component: DemoStoreImageFirebase,
   },
   {
     path: "/uploads",

@@ -100,9 +100,10 @@ function Home() {
               "insertdatetime media table paste wordcount",
             ],
             toolbar:
+              // eslint-disable-next-line no-multi-str
               "undo redo | formatselect | bold italic | \
             alignleft aligncenter alignright | link image |\
-            bullist numlist outdent indent | help",
+            bullist numlist outdent indent | help | media",
             toolbar_mode: "floating",
             tinycomments_mode: "embedded",
             tinycomments_author: "Author name",
